@@ -6,7 +6,7 @@
 
     <groupId>me.nyxnix</groupId>
     <artifactId>SimpleChatFilter</artifactId>
-    <version>1.0 BETA</version>
+    <version>1.0 beta</version>
     <packaging>jar</packaging>
 
     <name>SimpleChatFilter</name>
