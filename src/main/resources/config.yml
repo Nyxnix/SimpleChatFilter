@@ -1,4 +1,7 @@
 ## Any words added to this list will be replaced by "***" in the chat
+## this includes words that have this string in them
+## For example "Class" will be censored since it contains the string 'ass'
+## This will be fixed eventually :)
 words:
   - 'ass'
   - 'shit'
