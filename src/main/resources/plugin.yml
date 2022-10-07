@@ -1,0 +1,6 @@
+name: SimpleChatFilter
+version: '${project.version}'
+main: me.nyxnix.simplechatfilter.SimpleChatFilter
+api-version: 1.19
+authors: [ Nyxnix ]
+description: A simple chat filter plugin.
