@@ -6,6 +6,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public final class SimpleChatFilter extends JavaPlugin implements Listener {
     @Override
@@ -29,21 +31,19 @@ public final class SimpleChatFilter extends JavaPlugin implements Listener {
         // Pulling strings from config file
         final List<String> words = getConfig().getStringList("words");
 
-        /* Main section that replaces blacklisted words with asterisks
-           Pulls strings from config file then if that string is present in the message
-           It will be replaced with asterisks */
-        for(String listItem : words){
-            /* There is 100% better way to do this I just haven't figured it out yet
-            So for now im just comparing every message in lowercase to the list
-            which probably uses more resources than is needed :(
-             */
-            if(playerMessage.toLowerCase().contains(listItem)){
-                playerMessage = playerMessage.toLowerCase();
-                playerMessage = playerMessage.replace(listItem, "***");
+        Pattern pattern = Pattern.compile(words.toString(), Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(playerMessage);
+        boolean matchFound = matcher.find();
+
+        if(matchFound) {
+            for(String listItem : words) {
+                int wordLen = listItem.length();
+                String censorChar = "*".repeat(wordLen);
+                playerMessage = playerMessage.toLowerCase().replace(listItem, censorChar);
                 event.setMessage(playerMessage);
-                // log infraction to console
-                System.out.println("Blacklisted word found! Player: "+player.getPlayerListName()+" Message: "+playerMessageOriginal);
             }
+            // log infraction to console
+            System.out.println("Blacklisted word found! Player: "+player.getPlayerListName()+" Message: "+playerMessageOriginal);
         }
     }
 }
