@@ -38,7 +38,7 @@ public final class SimpleChatFilter extends JavaPlugin implements Listener {
         if(matchFound) {
             for(String listItem : words) {
                 int wordLen = listItem.length();
-                String censorChar = "*".repeat(wordLen);
+                String censorChar = getConfig().getString("censorChar").repeat(wordLen);
                 playerMessage = playerMessage.toLowerCase().replace(listItem, censorChar);
                 event.setMessage(playerMessage);
             }
